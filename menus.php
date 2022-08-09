@@ -75,7 +75,7 @@ class A11y_Walker_Nav_Menu extends Walker {
         $class_names = implode( ' ', apply_filters( 'nav_menu_submenu_css_class', $classes, $args, $depth ) );
         $class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
 
-        // NEW: Accessiblité : Ajouter un ID pour le lier à aria-controls
+        // NEW: On ajoute un ID pour le lier au aria-controls du bouton d'ouverture du sous-menu
         $id = 'id="sub-menu-item-' . $args->parent_item .'"';
 
         $output .= "{$n}{$indent}<ul$class_names{$id}>{$n}";
@@ -186,18 +186,22 @@ class A11y_Walker_Nav_Menu extends Walker {
             $atts['rel'] = 'noopener';
 
             // NEW: Précision dans le title
-            $atts['title'] = $menu_item->title . __( ' (s\'ouvre dans un nouvel onglet)', 'a11y' );
+            $atts['title'] = $menu_item->title . __( ' (s\'ouvre dans un nouvel onglet)', 'text-domain' );
 
         } else {
             $atts['rel'] = $menu_item->xfn;
         }
         $atts['href']         = ! empty( $menu_item->url ) ? $menu_item->url : '';
 
-        // NEW: Page courante : aria-current="page"
+        /**
+         * NEW: Indiquer aux lecteurs d’écran l’élément actif parmi un ensemble d’éléments. Dans notre cas, il aura pour valeur :
+         * `page` sur la page courante;
+         * `true` sur la page parente, si existante.
+         *
+         * @see aria-current(https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current)
+         */
         $atts['aria-current'] = $menu_item->current ? 'page' : '';
 
-        // NEW: Rubrique parente de la page courante : aria-current="true"
-        // ARIA(https://www.w3.org/WAI/standards-guidelines/aria/)
         if ( $menu_item->current_item_parent ) {
             $atts['aria-current']   = $menu_item->current_item_parent ? 'true' : '';
         }
@@ -254,8 +258,6 @@ class A11y_Walker_Nav_Menu extends Walker {
         // NEW: On vérifie si l'élément possède un sous-menu via la classe css "menu-item-has-children"
         $item_has_children = in_array( 'menu-item-has-children', $menu_item->classes );
         if ( $item_has_children ) {
-            // On crée une variable privée pour qu'elle soit disponible dans les autres fonctions
-            $this->current_item = $menu_item;
             /**
              * Bouton d'ouverture/fermeture du sous-menu
              *
@@ -268,7 +270,7 @@ class A11y_Walker_Nav_Menu extends Walker {
                                 <span class="sr-only">'. __('Ouvrir le sous-menu', 'text-domain') .'</span>
                             </button>';
 
-            // On transmet l'id de l'élément dans la fonction start_lvl()
+            // NEW: On transmet l'id de l'élément dans la fonction start_lvl() via un argument parent_item
             apply_filters( 'walker_nav_menu_start_lvl', $item_output, $menu_item, $depth, $args->parent_item=$menu_item->ID );
         }
         $item_output .= $args->after;
