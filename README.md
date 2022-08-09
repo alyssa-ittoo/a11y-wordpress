@@ -7,7 +7,7 @@ Création d'un walker maison pour rendre le menu WordPress accessible.
 ```php
 require_once 'walker/menus.php';
 ```
-* Enregistrer votre emplacement de menu dans un fichier de configuration (`functions.php` ou un sous-fichier) :
+* Enregistrer votre emplacement de menu ([codex](https://developer.wordpress.org/reference/functions/register_nav_menu/)) dans un fichier de configuration (`functions.php` ou un sous-fichier) :
 ```php
 function register_my_menu() {
     register_nav_menu( 'main-menu' => __( 'Menu principal', 'text-domain' ) );
