@@ -1,5 +1,5 @@
 document.addEventListener( 'DOMContentLoaded', ( function() {
-/** @type {HTMLElement[]} */
+	/** @type {HTMLElement[]} */
 	const menuItems = Array.from( document.querySelectorAll( 'li.menu-item-has-children' ) );
 
 	/**
@@ -8,7 +8,12 @@ document.addEventListener( 'DOMContentLoaded', ( function() {
 	 * @param {any}         value
 	 */
 	const setAttr = ( el, attr, value ) => el.setAttribute( attr, value );
-
+  
+  /**
+	 * Menu de navigation avec sous-menu
+	 *
+	 * @see https://www.w3.org/WAI/tutorials/menus/flyout/#flyoutnavkbbtn
+	 */
 	menuItems.forEach( ( el ) => {
 		const button = el.querySelector( 'button' );
 
@@ -42,4 +47,35 @@ document.addEventListener( 'DOMContentLoaded', ( function() {
 				} );
 		}
 	} );
+
+	/**
+	 * Mobile : au clic sur le bouton on affiche ou masque le menu de navigation
+   *
+   * (Code basé sur @see https://github.com/Automattic/_s/blob/master/js/navigation.js)
+	 */
+
+	/** @type {HTMLElement} */
+	const siteNavigation = document.querySelector( 'nav' );
+
+	if ( siteNavigation ) {
+		/** @type {HTMLElement} */
+		const mobileButton = siteNavigation.querySelector( 'button.menu-toggle' );
+
+		/**
+		 * Au clic sur le bouton mobile, on affiche ou masque le menu :
+		 * - on ajouter/supprime la classe "toggled" sur la <nav> qui nous servira à masquer/afficher en css
+		 * - on passe l'attribut "aria-expanded" à true/false
+		 */
+		if ( mobileButton ) {
+			mobileButton.addEventListener( 'click', function() {
+				siteNavigation.classList.toggle( 'toggled' );
+
+				if ( mobileButton.getAttribute( 'aria-expanded' ) === 'true' ) {
+					setAttr( mobileButton, 'aria-expanded', 'false' );
+				} else {
+					setAttr( mobileButton, 'aria-expanded', 'true' );
+				}
+			} );
+		}
+	}
 } ) );
