@@ -50,8 +50,8 @@ document.addEventListener( 'DOMContentLoaded', ( function() {
 
 	/**
 	 * Mobile : au clic sur le bouton on affiche ou masque le menu de navigation
-   *
-   * (Code basé sur @see https://github.com/Automattic/_s/blob/master/js/navigation.js)
+   	 *
+   	 * @see https://github.com/Automattic/_s/blob/master/js/navigation.js
 	 */
 
 	/** @type {HTMLElement} */
