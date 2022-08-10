@@ -9,7 +9,7 @@ document.addEventListener( 'DOMContentLoaded', ( function() {
 	 */
 	const setAttr = ( el, attr, value ) => el.setAttribute( attr, value );
   
-  /**
+   	/**
 	 * Menu de navigation avec sous-menu
 	 *
 	 * @see https://www.w3.org/WAI/tutorials/menus/flyout/#flyoutnavkbbtn
