@@ -2,20 +2,20 @@
 Création d'un walker maison pour rendre le menu WordPress accessible.
 
 ## Installation
-* Créer un dossier, `walker` par exemple dans votre thème, et y ajouter le fichier `menus.php`.
-* L'appeler depuis le fichier `functions.php` : 
+* Créer un dossier dans votre thème, le nommer `walker` par exemple. Ajouter dans ce dossier, le fichier `menus.php`. Il sert à étendre le walker [`Walker_Nav_Menu`](https://developer.wordpress.org/reference/classes/walker_nav_menu/) par défaut de WordPress.
+* Appeler ce fichier depuis le fichier `functions.php` : 
 ```php
 require_once 'walker/menus.php';
 ```
-* Enregistrer votre emplacement de menu ([codex](https://developer.wordpress.org/reference/functions/register_nav_menu/)) dans un fichier de configuration (`functions.php` ou un sous-fichier) :
+* Enregistrer un emplacement de menu ([codex](https://developer.wordpress.org/reference/functions/register_nav_menu/)) dans un fichier de configuration (`functions.php` ou un sous-fichier) :
 ```php
 function register_my_menu() {
     register_nav_menu( 'main-menu' => __( 'Menu principal', 'text-domain' ) );
 }
 add_action( 'after_setup_theme', 'register_my_menu' );
 ```
-* Afficher votre menu en reprenant le code du fichier `header.php`, et l'insérer où vous le souhaitez.
-* Créer votre menu depuis l'administration d'interface WordPress, avec l'emplacement précédemment enregistré.
+* Afficher le menu en reprenant le code du fichier `header.php`, et l'insérer où vous le souhaitez dans le thème.
+* Créer un menu depuis l'administration d'interface WordPress, avec l'emplacement précédemment enregistré.
 
 ## Correctifs apportés par ce repo :
 * Ajout de sémantique ([landmarks ARIA](https://disic.github.io/guide-integrateur/1-gabarit-general.html#html5aria)).
