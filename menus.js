@@ -26,21 +26,27 @@ document.addEventListener( 'DOMContentLoaded', ( function() {
 					 * Si le sous-menu est ouvert :
 					 * - on retire la classe "open" au sous-menu
 					 * - on passe l'attribut "aria-expanded" à false
+					 * - On indique visuellement que le bouton est fermé
 					 */
 					if ( parent && parent.classList.contains( 'open' ) ) {
 						parent.classList.remove( 'open' );
 
 						setAttr( parent.querySelector( 'button' ), 'aria-expanded', 'false' );
+						
+						parent.querySelector( 'span' ).innerHTML = '+';
 
 						/**
 						 * Si le sous-menu est fermé :
 						 * - on ajoute la classe "open" au sous-menu
 						 * - on passe l'attribut "aria-expanded" à true
+						 * - On indique visuellement que le bouton est ouvert
 						 */
 					} else if ( parent ) {
 						parent.classList.add( 'open' );
 
 						setAttr( parent.querySelector( 'button' ), 'aria-expanded', 'true' );
+						
+						parent.querySelector( 'span' ).innerHTML = '-';
 					}
 
 					event.preventDefault();
