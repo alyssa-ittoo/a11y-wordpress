@@ -1,5 +1,5 @@
 # a11y-wordpress
-Création d'un walker maison pour rendre le menu WordPress accessible.
+[Walker](https://developer.wordpress.org/reference/classes/walker/) maison pour rendre le menu WordPress accessible.
 
 ## Installation
 * Créer un nouveau dossier (`walker` par exemple) dans votre thème (`themes/nom_de_votre_theme`).
@@ -27,7 +27,4 @@ add_action( 'after_setup_theme', 'register_my_menu' );
 * Sur mobile, menu déroulant via un bouton.
 
 ## Tutoriel & explications
-Vous retrouverez les explications des chaques points dans le tutoriel Alsacréations : TODO: url
-
-### TODO:
-* Ajout de styles CSS ?
+Vous retrouverez les explications de chaque points dans le tutoriel Alsacréations
