@@ -1,5 +1,5 @@
 # a11y-wordpress
-Walker[doc WP](https://developer.wordpress.org/reference/classes/walker/) maison pour rendre le menu WordPress accessible.
+Walker [doc WP](https://developer.wordpress.org/reference/classes/walker/) maison pour rendre le menu WordPress accessible.
 
 ## Installation
 * Créer un nouveau dossier (`walker` par exemple) dans votre thème (`themes/nom_de_votre_theme`).
